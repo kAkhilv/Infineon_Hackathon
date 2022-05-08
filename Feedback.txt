@@ -1,0 +1,9 @@
+Great event. Well organized. Friendly hosts. Motivated by the purpose to impact day to day lives, especially in the healthcare industry.
+Having a non contact vital sensing and measurement device can be help in maintaining a social distancing. In addition to that, enhanced comfort to the patient is a huge plus
+Since we are from different engineering background, we had to invest a lot of time in understanding the signal and processing techniques used.
+Sharing the relevant tutorials and research beforehand as we can prepare ourselves and familiarize with basic terminology thus enabling us to spend majority of the Hackathon towards data processing and application.
+
+
+Next time, We would read more research papers and resources in different ways of execution
+We would also connect with more experts in the field, if time allows
+We would be interested to work with conventional sensors and semiconductors and explore different use cases mainly in the fields of Robotics and Autonomous Systems
