@@ -76,6 +76,10 @@ fs_lp = 1 #sampling frequency in rad/s
 order_lp = 4
 #Fs=1, lowcut = 0.2/500 , highcut = 0.5/500, order=6 for BR
 
+cutOff_lp2 = 50/500 #cutoff frequency in rad/s
+fs_lp2 = 1 #sampling frequency in rad/s
+order_lp2 = 4
+
 cutOff_hp = 0.2/500 #cutoff frequency in rad/s
 fs_hp = 1 #sampling frequency in rad/s
 order_hp = 4
@@ -94,17 +98,23 @@ with RadarIfxAvian(config_file) as device:                             # Initial
         if(len(raw_data) > 9999 and len(raw_data) % 10000 == 0):        # 5000 is the number of frames. which corresponds to 5seconds
             
             data = np.swapaxes(np.asarray(raw_data), 0, 1)                     
-            
-            phases, abses, _, _ = processing.do_processing(data)       # preprocessing to get the phase information
+            #bp = butter_bandpass_filter(data, lowcut, highcut, fs_bp, order_bp)
+            lp2= butter_lowpass_filter(data, cutOff_lp2, fs_lp2, order_lp2)
+            phases, abses, _, _ = processing.do_processing(lp2)       # preprocessing to get the phase information
             
             phases              = np.mean(phases, axis=0)
+            
             hp = butter_highpass_filter(phases, cutOff_hp, fs_hp,order_hp)
             lp= butter_lowpass_filter(hp, cutOff_lp, fs_lp, order_lp)            
             mean = np.mean(lp)
             lp = lp - mean
             plt.plot(lp)
             plt.show()
-            count = scipy.signal.find_peaks(lp, threshold=1)
+            index = scipy.signal.find_peaks(lp)
+            count=0
+            for i in index[0]:
+                if lp[i] > 1:
+                    count = count +1
             print(count*6)
             del data
             del phases
