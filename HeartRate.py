@@ -113,7 +113,7 @@ with RadarIfxAvian(config_file) as device:                             # Initial
             index = scipy.signal.find_peaks(lp)
             count=0
             for i in index[0]:
-                if lp[i] > 0.13:
+                if lp[i] > 0.17:
                     count = count +1
             print(count*6)
             del data
